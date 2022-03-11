@@ -16,6 +16,8 @@ export default function Product() {
       }}>
         <Head>
           <title>{data?.data?.title ?? 'detail'}</title>
+          <meta property="og:title" content={data?.data?.description ?? "vitreen"} key="title" />
+
         </Head>
 
         {isLoading ? <Loading/> : null}
