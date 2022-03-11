@@ -1,16 +1,14 @@
 import Head from "next/head";
-import {Navbar} from "@organisms/index";
 import Products from "./products";
+import { Container } from '@material-ui/core';
 
 export default function Home() {
     return (
-        <div>
+        <Container>
             <Head>
                 <title>Products</title>
             </Head>
-
             <Products/>
-
-        </div>
+        </Container>
     )
 }

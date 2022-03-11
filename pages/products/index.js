@@ -1,32 +1,28 @@
-import {useGetProduct, useGetProducts} from "../../commons/hooks/useProducts/useProducts.hook";
-import {dehydrate, QueryClient, useQuery} from "react-query";
-import axios from "axios";
-import {Container, Grid} from "@material-ui/core";
-import {useStyles} from "./style";
-import {ProductCard} from "@organisms/index";
+import { useGetProduct, useGetProducts } from '../../commons/hooks/useProducts/useProducts.hook';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
+import axios from 'axios';
+import { Container, Grid } from '@material-ui/core';
+import { useStyles } from './style';
+import { ProductCard } from '@organisms/index';
+import { Loading } from '@molecules/index';
+import { StoreProvider } from '@utils/Store';
 
 export default function Products() {
-    const classes = useStyles()
-    const {data , isLoading} = useGetProducts();
-    // if (isLoading) return <p>please loading ...</p>
-
-    console.log(222222222 , data)
-
-
-
-    return (
-        <Container className={classes.container}>
-            <Grid container spacing={3}>
-                {data.length ? data.map((item , index) => (
-                    <Grid item md={3} xs={6}>
-                        <ProductCard/>
-                    </Grid>
-                )) : null}
-
-
+  const classes = useStyles();
+  const { products, isLoading } = useGetProducts();
+  return (
+    <Container className={classes.container}>
+      {isLoading ? <Loading/> : null}
+      <Grid container spacing={3}>
+        {products?.length ? products.map( (product, index) => (
+            <Grid item md={3} xs={6} key={index}>
+              <ProductCard {...product} />
             </Grid>
-        </Container>
-    )
+        ) ) : null}
+      </Grid>
+    </Container>
+
+  );
 }
 
 // export async function getStaticProps(){
